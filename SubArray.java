@@ -20,7 +20,7 @@ public class SubArray {
             }
             if(sum>target){
                 sum-=n[i];
-                i--;
+                i++;
             }
             j++;
         }
