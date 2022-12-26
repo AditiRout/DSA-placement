@@ -1,88 +1,63 @@
-/Merge sort
-class MergeSort {
+package com.company;
 
-	void merge(int arr[], int l, int m, int r)
-	{
-		
-		int n1 = m - l + 1;
-		int n2 = r - m;
+public class MergeSort {
 
-	
-		int L[] = new int[n1];
-		int R[] = new int[n2];
+    public static void merge(int arr[],int l,int mid,int r){
+        int n1=mid-l+1;
+        int n2=r-mid;
 
-	
-		for (int i = 0; i < n1; ++i)
-			L[i] = arr[l + i];
-		for (int j = 0; j < n2; ++j)
-			R[j] = arr[m + 1 + j];
+        int a[]=new int[n1];
+        int b[]=new int[n2];
 
-		int i = 0, j = 0;
+        for(int i=0;i<n1;i++){
+            a[i]=arr[l+i];
+        }
 
-		int k = l;
-		while (i < n1 && j < n2) {
-			if (L[i] <= R[j]) {
-				arr[k] = L[i];
-				i++;
-			}
-			else {
-				arr[k] = R[j];
-				j++;
-			}
-			k++;
-		}
+        for(int i=0;i<n2;i++){
+            b[i]=arr[mid+1+i];
+        }
+        int i=0;
+        int j=0;
+        int k=l;
+        while(i<n1 && j<n2){
+            if(a[i]<b[j]){
+                arr[k]=a[i];
+                k++;
+                i++;
+            }
+            else{
+                arr[k]=b[j];
+                k++;
+                j++;
+            }
+        }
+        while(i<n1){
+            arr[k]=a[i];
+            k++;
+            i++;
+        }
+        while(j<n2){
+            arr[k]=b[j];
+            k++;
+            j++;
+        }
 
-		while (i < n1) {
-			arr[k] = L[i];
-			i++;
-			k++;
-		}
+    }
 
-		
-		while (j < n2) {
-			arr[k] = R[j];
-			j++;
-			k++;
-		}
-	}
+    public static void mergeSort(int arr[],int l,int r){
+        if(l<r){
+            int mid=(l+r)/2;
+            mergeSort(arr,l,mid);
+            mergeSort(arr,mid+1,r);
+            merge(arr,l,mid,r);
+        }
+    }
 
-	
-	void sort(int arr[], int l, int r)
-	{
-		if (l < r) {
-			
-			int m = l + (r - l) / 2;
-
-			sort(arr, l, m);
-			sort(arr, m + 1, r);
-
-			
-			merge(arr, l, m, r);
-		}
-	}
-
-
-	static void printArray(int arr[])
-	{
-		int n = arr.length;
-		for (int i = 0; i < n; ++i)
-			System.out.print(arr[i] + " ");
-		System.out.println();
-	}
-
-	
-	public static void main(String args[])
-	{
-		int arr[] = { 12, 11, 13, 5, 6, 7 };
-
-		System.out.println("Given Array");
-		printArray(arr);
-
-		MergeSort ob = new MergeSort();
-		ob.sort(arr, 0, arr.length - 1);
-
-		System.out.println("\nSorted array");
-		printArray(arr);
-	}
+    public static void main(String[] args){
+        int arr[]={5,4,3,2,1};
+        mergeSort(arr,0,4);
+        for(int i=0;i<5;i++){
+            System.out.println(arr[i]);
+        }
+    }
 }
-
