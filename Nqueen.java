@@ -16,7 +16,7 @@ public class Nqueen {
         while (k>=1 && l<=N) {
             if (board[k][l] == 1)
                 return true;
-            k=k+1;
+            k=k-1;
             l=l+1;
         }
 
